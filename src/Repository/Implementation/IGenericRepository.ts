@@ -1,7 +1,7 @@
-export interface IGenericRepository<T> {
-    getByIdAsync(id: number): Promise<T | null>;
+import { FindOptionsWhere } from "typeorm";
 
-    getAllAsync(): Promise<ReadonlyArray<T>>;
+export interface IGenericRepository<T> {
+    findOneBy(condition: FindOptionsWhere<T>): Promise<T | null>;
 
     addAsync(entity: T): Promise<T>;
 
