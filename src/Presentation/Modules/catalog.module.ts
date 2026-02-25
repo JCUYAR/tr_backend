@@ -5,8 +5,8 @@ import { AddCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/
 import { Area } from 'src/Model/Entities/area.entity';
 import { Category } from 'src/Model/Entities/category.entity';
 import { Status } from 'src/Model/Entities/status.entity';
-import { CategoryRepository } from 'src/Repository/Interface/CategoryRepository';
 import { CatalogController } from '../Controllers/CatalogController';
+import { CategoryRepository } from 'src/Repository/Implementation/CategoryRepository';
 
 @Module({
   imports: [

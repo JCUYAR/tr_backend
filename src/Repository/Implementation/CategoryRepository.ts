@@ -1,9 +1,9 @@
 import { Category } from "src/Model/Entities/category.entity";
-import { GenericRepository } from "./GenericRepository";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { ICategoryRepository } from "../Implementation/ICategoryRepository";
+import { ICategoryRepository } from "../Interface/ICategoryRepository";
+import { GenericRepository } from "./GenericRepository";
 
 @Injectable()
 export class CategoryRepository extends GenericRepository<Category> implements ICategoryRepository{

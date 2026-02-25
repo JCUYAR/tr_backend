@@ -5,7 +5,7 @@ import { Category } from "src/Model/Entities/category.entity";
 import { AppError } from "src/Model/Wrappers/Error";
 import { ErrorCode } from "src/Model/Wrappers/ErrorCode";
 import { Inject } from "@nestjs/common";
-import type { ICategoryRepository } from "src/Repository/Implementation/ICategoryRepository";
+import type { ICategoryRepository } from "src/Repository/Interface/ICategoryRepository";
 
 @CommandHandler(AddCategoryCommand)
 export class AddCategoryCommandHandler implements ICommandHandler<AddCategoryCommand> {

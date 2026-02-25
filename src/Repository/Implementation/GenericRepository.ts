@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { IGenericRepository } from "../Implementation/IGenericRepository";
+import { IGenericRepository } from "../Interface/IGenericRepository";
 import { Repository, ObjectLiteral, FindOptionsWhere  } from "typeorm";
 
 @Injectable()
