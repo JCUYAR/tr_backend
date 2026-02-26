@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './Presentation/Modules/user.module';
 import { CatalogModule } from './Presentation/Modules/catalog.module';
 import { CategoryModule } from './Presentation/Modules/category.module';
+import { TareoModule } from './Presentation/Modules/tareo.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CategoryModule } from './Presentation/Modules/category.module';
     UserModule,
     CatalogModule,
     CategoryModule,
+    TareoModule,
 
   ],
   controllers: [AppController],
