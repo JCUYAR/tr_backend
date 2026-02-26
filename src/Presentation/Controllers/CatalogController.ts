@@ -1,8 +1,10 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 import { ApiOperation } from "@nestjs/swagger";
+import { AddAreaCommand } from "src/Domain/Feature/Commands/Requests/AddAreaCommand";
 import { AddCategoryCommand } from "src/Domain/Feature/Commands/Requests/AddCategoryCommand";
 import { AddStatusCommand } from "src/Domain/Feature/Commands/Requests/AddStatusCommand";
+import { AddAreaDto } from "src/Model/DTOs/BodySchema/Catalog/Area/AddAreaDto";
 import { AddStatusDto } from "src/Model/DTOs/BodySchema/Catalog/Status/AddStatusDto";
 
 @Controller('catalog')
@@ -18,6 +20,16 @@ export class CatalogController {
     ){
         return this.commandBus.execute(
       new AddStatusCommand(body.description)
+    );
+    }
+    
+    @Post('AddArea')
+    @ApiOperation({ summary: 'AddArea' })
+    async addArea(
+        @Body() body: AddAreaDto
+    ){
+        return this.commandBus.execute(
+      new AddAreaCommand(body.description)
     );
     }
 }

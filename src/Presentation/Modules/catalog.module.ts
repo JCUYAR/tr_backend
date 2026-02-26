@@ -6,6 +6,8 @@ import { Area } from 'src/Model/Entities/area.entity';
 import { Status } from 'src/Model/Entities/status.entity';
 import { CatalogController } from '../Controllers/CatalogController';
 import { StatusRepository } from 'src/Repository/Implementation/StatusRepository';
+import { AreaRepository } from 'src/Repository/Implementation/AreaRepository';
+import { AddAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/AddAreaCommandHandler';
 
 @Module({
   imports: [
@@ -23,7 +25,12 @@ import { StatusRepository } from 'src/Repository/Implementation/StatusRepository
     {
       provide: 'IStatusRepository',
       useClass: StatusRepository,
-    }
+    },
+    AddAreaCommandHandler,
+    {
+      provide: 'IAreaRepository',
+      useClass: AreaRepository,
+    },
   ],
   exports: [],
 })

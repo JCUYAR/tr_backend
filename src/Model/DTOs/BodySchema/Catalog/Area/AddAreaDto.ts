@@ -1,9 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 
-export class AddStatusDto {
+export class AddAreaDto {
     @ApiProperty({
-        example: 'Abierto',
-        description: 'Status description',
+        example: 'Sistemas',
+        description: 'Area description',
     })
     description: string;
 }
