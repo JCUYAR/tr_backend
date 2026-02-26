@@ -1,6 +1,5 @@
-export class AddCategoryCommand {
+export class AddStatusCommand {
     constructor(
-        public readonly key: string,
         public readonly description: string
     ) {}
 }

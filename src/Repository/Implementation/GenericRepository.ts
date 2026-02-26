@@ -12,8 +12,9 @@ export class GenericRepository<T extends ObjectLiteral> implements IGenericRepos
         return await this.repository.findOne({ where: condition });
     }
 
-    async addAsync(entity: T): Promise<T> {
-        return await this.repository.save(entity);
+    async addAsync(entity: T): Promise<boolean> {
+        const result = await this.repository.insert(entity);
+        return result.identifiers.length > 0;
     }
 
     async updateAsync(entity: T): Promise<T> {

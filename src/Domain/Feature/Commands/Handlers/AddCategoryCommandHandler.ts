@@ -17,20 +17,20 @@ export class AddCategoryCommandHandler implements ICommandHandler<AddCategoryCom
     async execute(
         command: AddCategoryCommand,
     ): Promise<BaseResult<boolean>> {
-        const { description } = command;
 
-        if (!command || description.trim().length === 0) {
+        if (!command || command.description.trim().length === 0) {
             return BaseResult.fail(new AppError(ErrorCode.MandatoryField, "The description is required", "description"));
         }
 
-        const exists = await this.categoryRepository.existsByDescription(description);
+        const exists = await this.categoryRepository.existsByDescription(command.description);
 
         if (exists) {
             return BaseResult.fail(new AppError(ErrorCode.DuplicateData, "The category is already exists", "description"));
         }
 
         const category = new Category();
-        category.description = description;
+        category.ca_key = command.key;
+        category.description = command.description;
 
         const result = await this.categoryRepository.addAsync(category);
 

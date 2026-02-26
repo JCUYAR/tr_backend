@@ -3,7 +3,7 @@ import { FindOptionsWhere } from "typeorm";
 export interface IGenericRepository<T> {
     findOneBy(condition: FindOptionsWhere<T>): Promise<T | null>;
 
-    addAsync(entity: T): Promise<T>;
+    addAsync(entity: T): Promise<boolean>;
 
     updateAsync(entity: T): Promise<T>;
 
