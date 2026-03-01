@@ -7,6 +7,7 @@ import { Tareo } from "src/Model/Entities/tareo.entity";
 import { User } from "src/Model/Entities/user.entity";
 import { Area } from "src/Model/Entities/area.entity";
 import { Status } from "src/Model/Entities/status.entity";
+import { Category } from "src/Model/Entities/category.entity";
 
 @CommandHandler(AddTareoCommand)
 export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> {
@@ -24,6 +25,7 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
         tareo.description = command.description;
         tareo.user = { id: command.user_id } as User;
         tareo.area = { id: command.area_id } as Area;
+        tareo.category = { id: command.category_id } as unknown as Category;
         tareo.status = { id: command.status_id } as Status;
         tareo.work_date = command.work_date;
         tareo.start_time = command.start_time;

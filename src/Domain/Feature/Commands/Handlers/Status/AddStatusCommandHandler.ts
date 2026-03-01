@@ -3,9 +3,9 @@ import { BaseResult } from "src/Model/Wrappers/BaseResult";
 import { AppError } from "src/Model/Wrappers/Error";
 import { ErrorCode } from "src/Model/Wrappers/ErrorCode";
 import { Inject } from "@nestjs/common";
-import { AddStatusCommand } from "../Requests/AddStatusCommand";
 import type { IStatusRepository } from "src/Repository/Interface/IStatusRepository";
 import { Status } from "src/Model/Entities/status.entity";
+import { AddStatusCommand } from "../../Requests/Status/AddStatusCommand";
 
 @CommandHandler(AddStatusCommand)
 export class AddStatusCommandHandler implements ICommandHandler<AddStatusCommand> {

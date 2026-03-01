@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AddStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/AddStatusCommandHandler';
 import { Area } from 'src/Model/Entities/area.entity';
 import { Status } from 'src/Model/Entities/status.entity';
 import { CatalogController } from '../Controllers/CatalogController';
 import { StatusRepository } from 'src/Repository/Implementation/StatusRepository';
 import { AreaRepository } from 'src/Repository/Implementation/AreaRepository';
-import { AddAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/AddAreaCommandHandler';
+import { AddStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/AddStatusCommandHandler';
+import { AddAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/AddAreaCommandHandler';
 
 @Module({
   imports: [
