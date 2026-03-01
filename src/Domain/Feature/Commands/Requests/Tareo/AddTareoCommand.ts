@@ -7,7 +7,6 @@ export class AddTareoCommand {
         public readonly status_id: number,
         public readonly work_date: Date,
         public readonly start_time: string,
-        public readonly end_time: string,
-        public readonly total_hours: number
+        public readonly end_time: string
     ) {}
 }

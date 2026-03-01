@@ -28,6 +28,9 @@ import { AddCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/
       useClass: CategoryRepository,
     }
   ],
-  exports: [],
+  exports: [
+    'ICategoryRepository'
+
+  ],
 })
 export class CategoryModule {}

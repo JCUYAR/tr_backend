@@ -8,6 +8,13 @@ import { User } from "src/Model/Entities/user.entity";
 import { Area } from "src/Model/Entities/area.entity";
 import { Status } from "src/Model/Entities/status.entity";
 import { Category } from "src/Model/Entities/category.entity";
+import type { IUserRepository } from "src/Repository/Interface/IUserRepository";
+import { ErrorCode } from "src/Model/Wrappers/ErrorCode";
+import { AppError } from "src/Model/Wrappers/Error";
+import type { IStatusRepository } from "src/Repository/Interface/IStatusRepository";
+import type { IAreaRepository } from "src/Repository/Interface/IAreaRepository";
+import type { ICategoryRepository } from "src/Repository/Interface/ICategoryRepository";
+import { calculateHours } from "src/Domain/Helpers/CalculateWorkedHours";
 
 @CommandHandler(AddTareoCommand)
 export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> {
@@ -15,11 +22,48 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
         @Inject('ITareoRepository')
         private readonly tareoRepository: ITareoRepository,
 
+        @Inject('IUserRepository')
+        private readonly userRepository: IUserRepository,
+
+        @Inject('IStatusRepository')
+        private readonly statusRepository: IStatusRepository,
+
+        @Inject('IAreaRepository')
+        private readonly areaRepository: IAreaRepository,
+
+        @Inject('ICategoryRepository')
+        private readonly categoryRepository: ICategoryRepository,
+
     ) {}
 
     async execute(
         command: AddTareoCommand,
     ): Promise<BaseResult<boolean>> {
+        const isUser = await this.userRepository.findById(command.user_id);
+
+        if (!isUser) {
+            return BaseResult.fail(new AppError(ErrorCode.NotFound, "User doesn't exists", "user"))
+        }
+
+        const isStatus = await this.statusRepository.findById(command.status_id);
+
+        if (!isStatus) {
+            return BaseResult.fail(new AppError(ErrorCode.NotFound, "Status doesn't exists", "status"))
+        }
+
+        const isArea = await this.areaRepository.findById(command.area_id);
+
+        if (!isArea) {
+            return BaseResult.fail(new AppError(ErrorCode.NotFound, "Area doesn't exists", "area"))
+        }
+
+        const isCategory = await this.categoryRepository.findById(command.category_id);
+
+        if (!isCategory) {
+            return BaseResult.fail(new AppError(ErrorCode.NotFound, "Category doesn't exists", "category"))
+        }
+
+
 
         const tareo = new Tareo();
         tareo.description = command.description;
@@ -30,9 +74,9 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
         tareo.work_date = command.work_date;
         tareo.start_time = command.start_time;
         tareo.end_time = command.end_time;
-        tareo.total_hours = command.total_hours;
+        tareo.total_hours = calculateHours(command.start_time, command.end_time);
 
-        const result = await this.tareoRepository.addAsync(tareo);
+        await this.tareoRepository.addAsync(tareo);
 
         return BaseResult.ok(true);
 

@@ -23,9 +23,6 @@ export class AddTareoDto {
     start_time: string;  
 
     @ApiProperty({})
-    end_time: string;  
-
-    @ApiProperty({})
-    total_hours: number;
+    end_time: string;
 
 }

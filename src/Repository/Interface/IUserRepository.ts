@@ -1,8 +1,9 @@
+import { User } from "src/Model/Entities/user.entity";
 import { IGenericRepository } from "./IGenericRepository";
-import { Status } from "src/Model/Entities/status.entity";
+import { IsExistsUserResponse } from "src/Model/DTOs/Responses/User/IsExistsUserResponse";
 
 
-export interface IUserRepository extends IGenericRepository<Status> {
-    findById(id: number): Promise<boolean>;
+export interface IUserRepository extends IGenericRepository<User> {
+    findById(id: number): Promise<IsExistsUserResponse | null>;
 
 }

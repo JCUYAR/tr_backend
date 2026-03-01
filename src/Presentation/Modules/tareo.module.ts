@@ -7,6 +7,9 @@ import { GetListTareoQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Ta
 import { TareoController } from '../Controllers/TareoController';
 import { GetListTareoByUserQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Tareo/GetListTareoByUserQueryHandler';
 import { AddTareoCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Tareo/AddTareoCommandHandler';
+import { UserModule } from './user.module';
+import { CatalogModule } from './catalog.module';
+import { CategoryModule } from './category.module';
 
 @Module({
   imports: [
@@ -14,6 +17,9 @@ import { AddTareoCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Tar
       Tareo
     ]),
     CqrsModule,
+    UserModule,
+    CatalogModule,
+    CategoryModule,
   ],
   controllers: [
     TareoController

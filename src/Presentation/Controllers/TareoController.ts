@@ -39,8 +39,7 @@ export class TareoController {
                 body.status_id,
                 body.work_date,
                 body.start_time,
-                body.end_time,
-                body.total_hours
+                body.end_time
             )
         )
     }

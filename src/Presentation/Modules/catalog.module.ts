@@ -32,6 +32,9 @@ import { AddAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area
       useClass: AreaRepository,
     },
   ],
-  exports: [],
+  exports: [
+    'IStatusRepository',
+    'IAreaRepository',
+  ],
 })
 export class CatalogModule {}

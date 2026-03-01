@@ -9,7 +9,7 @@ import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn
 @Entity({ name: 'category' })
 export class Category {
     @PrimaryGeneratedColumn('increment',{ type: 'int' })
-    id: string;
+    id: number;
     
     @Column({ type: 'char', length: 5 })
     ca_key: string;
