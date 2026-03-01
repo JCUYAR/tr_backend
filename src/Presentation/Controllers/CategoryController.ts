@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 import { ApiOperation } from "@nestjs/swagger";
-import { AddCategoryCommand } from "src/Domain/Feature/Commands/Requests/AddCategoryCommand";
+import { AddCategoryCommand } from "src/Domain/Feature/Commands/Requests/Category/AddCategoryCommand";
 import { AddStatusDto } from "src/Model/DTOs/BodySchema/Catalog/Status/AddStatusDto";
 import { AddCategoryDto } from "src/Model/DTOs/BodySchema/Category/AddCategoryDto";
 

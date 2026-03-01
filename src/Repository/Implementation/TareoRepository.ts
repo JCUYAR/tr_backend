@@ -4,13 +4,18 @@ import { Repository } from "typeorm";
 import { Tareo } from "src/Model/Entities/tareo.entity";
 import { GetListTareoResponse } from "src/Model/DTOs/Responses/Tareo/GetListTareoResponse";
 import { Injectable } from "@nestjs/common";
+import { GenericRepository } from "./GenericRepository";
+import { Category } from "src/Model/Entities/category.entity";
 
 @Injectable()
-export class TareoRepository implements ITareoRepository {
+export class TareoRepository extends GenericRepository<Tareo> implements ITareoRepository {
     constructor(
         @InjectRepository(Tareo)
-        private readonly repository: Repository<Tareo>,
-    ) {}
+        repository: Repository<Tareo>,
+    ) {
+        super(repository)
+
+    }
 
     async findAllWithRelations(): Promise<GetListTareoResponse[]> {
         const result = await this.repository

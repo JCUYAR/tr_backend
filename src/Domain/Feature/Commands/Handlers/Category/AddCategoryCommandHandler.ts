@@ -1,11 +1,11 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
-import { AddCategoryCommand } from "../Requests/AddCategoryCommand";
 import { BaseResult } from "src/Model/Wrappers/BaseResult";
 import { Category } from "src/Model/Entities/category.entity";
 import { AppError } from "src/Model/Wrappers/Error";
 import { ErrorCode } from "src/Model/Wrappers/ErrorCode";
 import { Inject } from "@nestjs/common";
 import type { ICategoryRepository } from "src/Repository/Interface/ICategoryRepository";
+import { AddCategoryCommand } from "../../Requests/Category/AddCategoryCommand";
 
 @CommandHandler(AddCategoryCommand)
 export class AddCategoryCommandHandler implements ICommandHandler<AddCategoryCommand> {

@@ -1,9 +1,8 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 import { ApiOperation } from "@nestjs/swagger";
-import { AddAreaCommand } from "src/Domain/Feature/Commands/Requests/AddAreaCommand";
-import { AddCategoryCommand } from "src/Domain/Feature/Commands/Requests/AddCategoryCommand";
-import { AddStatusCommand } from "src/Domain/Feature/Commands/Requests/AddStatusCommand";
+import { AddAreaCommand } from "src/Domain/Feature/Commands/Requests/Area/AddAreaCommand";
+import { AddStatusCommand } from "src/Domain/Feature/Commands/Requests/Status/AddStatusCommand";
 import { AddAreaDto } from "src/Model/DTOs/BodySchema/Catalog/Area/AddAreaDto";
 import { AddStatusDto } from "src/Model/DTOs/BodySchema/Catalog/Status/AddStatusDto";
 

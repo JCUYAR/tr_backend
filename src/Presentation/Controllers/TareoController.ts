@@ -1,7 +1,7 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { GetListTareoByUserQuery } from "src/Domain/Feature/Queries/Requests/GetListTareoByUserQuery";
-import { GetListTareoQuery } from "src/Domain/Feature/Queries/Requests/GetListTareoQuery";
+import { GetListTareoByUserQuery } from "src/Domain/Feature/Queries/Requests/Tareo/GetListTareoByUserQuery";
+import { GetListTareoQuery } from "src/Domain/Feature/Queries/Requests/Tareo/GetListTareoQuery";
 
 @Controller('tareo')
 export class TareoController {

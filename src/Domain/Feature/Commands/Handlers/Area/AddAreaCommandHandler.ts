@@ -3,9 +3,9 @@ import { BaseResult } from "src/Model/Wrappers/BaseResult";
 import { AppError } from "src/Model/Wrappers/Error";
 import { ErrorCode } from "src/Model/Wrappers/ErrorCode";
 import { Inject } from "@nestjs/common";
-import { AddAreaCommand } from "../Requests/AddAreaCommand";
 import type { IAreaRepository } from "src/Repository/Interface/IAreaRepository";
 import { Area } from "src/Model/Entities/area.entity";
+import { AddAreaCommand } from "../../Requests/Area/AddAreaCommand";
 
 @CommandHandler(AddAreaCommand)
 export class AddAreaCommandHandler implements ICommandHandler<AddAreaCommand> {

@@ -3,9 +3,9 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tareo } from 'src/Model/Entities/tareo.entity';
 import { TareoRepository } from 'src/Repository/Implementation/TareoRepository';
-import { GetListTareoQueryHandler } from 'src/Domain/Feature/Queries/Handlers/GetListTareoQueryHandler';
+import { GetListTareoQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Tareo/GetListTareoQueryHandler';
 import { TareoController } from '../Controllers/TareoController';
-import { GetListTareoByUserQueryHandler } from 'src/Domain/Feature/Queries/Handlers/GetListTareoByUserQueryHandler';
+import { GetListTareoByUserQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Tareo/GetListTareoByUserQueryHandler';
 
 @Module({
   imports: [
