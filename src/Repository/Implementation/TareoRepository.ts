@@ -22,6 +22,7 @@ export class TareoRepository implements ITareoRepository {
             .select([
                 't.id as id',
                 't.work_date as workDate',
+                't.description as description',
                 't.start_time as startTime',
                 't.end_time as endTime',
                 't.total_hours as totalHours',
@@ -47,11 +48,12 @@ export class TareoRepository implements ITareoRepository {
       .select([
         't.id as id',
         't.work_date as workDate',
+        't.description as description',
         't.total_hours as totalHours',
         'u.username as username',
-        'c.name as category',
-        'a.name as area',
-        's.name as status',
+        'c.description as category',
+        'a.description as area',
+        's.description as status',
       ])
       .getRawMany();
   }

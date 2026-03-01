@@ -5,6 +5,7 @@ import { Tareo } from 'src/Model/Entities/tareo.entity';
 import { TareoRepository } from 'src/Repository/Implementation/TareoRepository';
 import { GetListTareoQueryHandler } from 'src/Domain/Feature/Queries/Handlers/GetListTareoQueryHandler';
 import { TareoController } from '../Controllers/TareoController';
+import { GetListTareoByUserQueryHandler } from 'src/Domain/Feature/Queries/Handlers/GetListTareoByUserQueryHandler';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { TareoController } from '../Controllers/TareoController';
     TareoController
   ],
   providers: [
-    GetListTareoQueryHandler,
+    GetListTareoQueryHandler, GetListTareoByUserQueryHandler,
     {
       provide: 'ITareoRepository',
       useClass: TareoRepository,
