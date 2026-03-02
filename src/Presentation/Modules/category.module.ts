@@ -8,6 +8,7 @@ import { CatalogController } from '../Controllers/CatalogController';
 import { CategoryRepository } from 'src/Repository/Implementation/CategoryRepository';
 import { CategoryController } from '../Controllers/CategoryController';
 import { AddCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Category/AddCategoryCommandHandler';
+import { UpdateCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Category/UpdateCategoryCommandHandler';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { AddCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/
   ],
   providers: [
     AddCategoryCommandHandler,
+    UpdateCategoryCommandHandler,
     {
       provide: 'ICategoryRepository',
       useClass: CategoryRepository,

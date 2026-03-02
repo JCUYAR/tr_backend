@@ -1,9 +1,11 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, Put } from "@nestjs/common";
 import { CommandBus } from "@nestjs/cqrs";
 import { ApiOperation } from "@nestjs/swagger";
 import { AddCategoryCommand } from "src/Domain/Feature/Commands/Requests/Category/AddCategoryCommand";
+import { UpdateCategoryCommand } from "src/Domain/Feature/Commands/Requests/Category/UpdateCategoryCommand";
 import { AddStatusDto } from "src/Model/DTOs/BodySchema/Catalog/Status/AddStatusDto";
 import { AddCategoryDto } from "src/Model/DTOs/BodySchema/Category/AddCategoryDto";
+import { UpdateCategoryDto } from "src/Model/DTOs/BodySchema/Category/UpdateCategoryDto";
 
 @Controller('category')
 export class CategoryController {
@@ -19,5 +21,19 @@ export class CategoryController {
         return this.commandBus.execute(
       new AddCategoryCommand(body.key, body.description)
     );
+    }
+
+    @Put('UpdateCategory')
+    @ApiOperation({ summary: 'UpdateCategory' })
+    async updateCategory(
+        @Body() body: UpdateCategoryDto
+    ) {
+        return this.commandBus.execute(
+            new UpdateCategoryCommand(
+                body.id,
+                body.key,
+                body.description
+            )
+        )
     }
 }

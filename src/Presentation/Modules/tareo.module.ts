@@ -10,6 +10,7 @@ import { AddTareoCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Tar
 import { UserModule } from './user.module';
 import { CatalogModule } from './catalog.module';
 import { CategoryModule } from './category.module';
+import { UpdateTareoCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Tareo/UpdateTareoCommandHandler';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { CategoryModule } from './category.module';
     GetListTareoQueryHandler, 
     GetListTareoByUserQueryHandler,
     AddTareoCommandHandler,
+    UpdateTareoCommandHandler,
     {
       provide: 'ITareoRepository',
       useClass: TareoRepository,

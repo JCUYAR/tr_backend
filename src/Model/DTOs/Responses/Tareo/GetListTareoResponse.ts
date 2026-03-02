@@ -1,5 +1,6 @@
 export class GetListTareoResponse {
   id: number;
+  tareoCode: string;
   description : string;
   username: string;
   category: string;

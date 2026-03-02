@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiOperation } from "@nestjs/swagger";
 import { AddTareoCommand } from "src/Domain/Feature/Commands/Requests/Tareo/AddTareoCommand";
+import { UpdateTareoCommand } from "src/Domain/Feature/Commands/Requests/Tareo/UpdateTareoCommand";
 import { GetListTareoByUserQuery } from "src/Domain/Feature/Queries/Requests/Tareo/GetListTareoByUserQuery";
 import { GetListTareoQuery } from "src/Domain/Feature/Queries/Requests/Tareo/GetListTareoQuery";
 import { AddTareoDto } from "src/Model/DTOs/BodySchema/Tareo/AddTareoDto";
+import { UpdateTareoDto } from "src/Model/DTOs/BodySchema/Tareo/UpdateTareoDto";
 
 @Controller('tareo')
 export class TareoController {
@@ -38,6 +40,24 @@ export class TareoController {
                 body.area_id,
                 body.status_id,
                 body.work_date,
+                body.start_time,
+                body.end_time
+            )
+        )
+    }
+
+    @Put('UpdateTareo')
+    @ApiOperation({ summary: 'UpdateTareo' })
+    async updateTareo(
+        @Body() body: UpdateTareoDto
+    ) {
+        return this.commandBus.execute(
+            new UpdateTareoCommand(
+                body.id,
+                body.description,
+                body.category_id,
+                body.area_id,
+                body.status_id,
                 body.start_time,
                 body.end_time
             )

@@ -9,6 +9,9 @@ export class Tareo {
     @PrimaryGeneratedColumn('increment', { type: 'int' })
     id: number;
 
+    @Column({ type: 'varchar', length: 20, unique: true })
+    tareo_code: string;
+
     @ManyToOne(() => User, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'user_id' })
     user: User;
