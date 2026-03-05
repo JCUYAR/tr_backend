@@ -38,6 +38,6 @@ export class AddCategoryCommandHandler implements ICommandHandler<AddCategoryCom
             return BaseResult.fail(new AppError(ErrorCode.DatabaseCommitNotAffected, "Category not created", "description"));
         }
 
-        return BaseResult.ok(true);
+        return BaseResult.ok();
     }
 }

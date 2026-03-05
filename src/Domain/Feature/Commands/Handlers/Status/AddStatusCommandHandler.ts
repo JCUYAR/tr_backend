@@ -37,6 +37,6 @@ export class AddStatusCommandHandler implements ICommandHandler<AddStatusCommand
             return BaseResult.fail(new AppError(ErrorCode.DatabaseCommitNotAffected, "Status not created", "description"));
         }
 
-        return BaseResult.ok(true);
+        return BaseResult.ok();
     }
 }

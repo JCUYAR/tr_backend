@@ -36,6 +36,6 @@ export class UpdateCategoryCommandHandler
 
     await this.categoryRepository.updateAsync(category);
 
-    return BaseResult.ok(true);
+    return BaseResult.ok();
   }
 }

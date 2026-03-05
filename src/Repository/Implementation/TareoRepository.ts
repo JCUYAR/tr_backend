@@ -5,6 +5,7 @@ import { Tareo } from "src/Model/Entities/tareo.entity";
 import { GetListTareoResponse } from "src/Model/DTOs/Responses/Tareo/GetListTareoResponse";
 import { Injectable } from "@nestjs/common";
 import { GenericRepository } from "./GenericRepository";
+import { BaseResult } from "src/Model/Wrappers/BaseResult";
 
 @Injectable()
 export class TareoRepository extends GenericRepository<Tareo> implements ITareoRepository {
@@ -16,7 +17,7 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
 
     }
 
-    async findAllWithRelations(): Promise<GetListTareoResponse[]> {
+    async findAllWithRelations(): Promise<BaseResult<GetListTareoResponse[]>> {
         const result = await this.repository
             .createQueryBuilder('t')
             .leftJoin('t.user', 'u')
@@ -38,7 +39,7 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
             ])
             .getRawMany();
 
-        return result;
+        return BaseResult.ok(result);
     }
 
     async findByUser(userId: number): Promise<GetListTareoResponse[]> {

@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { IUserRepository } from "../Interface/IUserRepository";
 import { GenericRepository } from "./GenericRepository";
-import { User } from "src/Model/Entities/user.entity";
-import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { IsExistsUserResponse } from "src/Model/DTOs/Responses/User/IsExistsUserResponse";
+import { User } from "src/Model/Entities/user.entity";
+import { InjectRepository } from "@nestjs/typeorm";
 
 @Injectable()
 export class UserRepository extends GenericRepository<User> implements IUserRepository {
@@ -21,5 +21,10 @@ export class UserRepository extends GenericRepository<User> implements IUserRepo
             id: user?.id,
             username: user?.username
         }
+    }
+
+    async existsByUsername(username: string): Promise<boolean> {
+        const category = await this.findOneBy({ username });
+        return !!category;
     }
 }
