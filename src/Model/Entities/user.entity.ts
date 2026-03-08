@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Role } from "./role.entity";
 
 @Entity({ name: 'users' })
 export class User {
@@ -19,6 +20,10 @@ export class User {
 
     @Column({ type: 'varchar', length: 100 })
     last_name: string;
+
+    @ManyToOne(() => Role)
+    @JoinColumn({ name: 'role_id' })
+    role: Role;
 
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
