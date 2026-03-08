@@ -7,6 +7,7 @@ import { UserModule } from './Presentation/Modules/user.module';
 import { CatalogModule } from './Presentation/Modules/catalog.module';
 import { CategoryModule } from './Presentation/Modules/category.module';
 import { TareoModule } from './Presentation/Modules/tareo.module';
+import { AuthModule } from './Presentation/Modules/auth.module';
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { TareoModule } from './Presentation/Modules/tareo.module';
     CatalogModule,
     CategoryModule,
     TareoModule,
-
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

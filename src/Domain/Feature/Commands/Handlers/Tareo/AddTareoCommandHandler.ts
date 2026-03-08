@@ -37,9 +37,7 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
 
     ) {}
 
-    async execute(
-        command: AddTareoCommand,
-    ): Promise<BaseResult<boolean>> {
+    async execute(command: AddTareoCommand) {
         const isUser = await this.userRepository.findById(command.user_id);
 
         if (!isUser) {

@@ -25,12 +25,19 @@ export class UserRepository extends GenericRepository<User> implements IUserRepo
     }
 
     async existsByUsername(username: string): Promise<IsExistsUserResponse | null> {
-        const user = await this.findOneBy({ username });
+        
+        const user = await this.repository.findOne({ 
+            where: { username },
+            relations: ['role'] 
+        });
+
         if (!user) return null;
+        
         return {
             id: user?.id,
             username: user?.username,
-            password: user?.us_password
+            password: user?.us_password,
+            role: user.role.description
         }
     }
 }

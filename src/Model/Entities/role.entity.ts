@@ -1,5 +1,5 @@
 import { Entity } from "typeorm";
 import { BaseCatalogEntity } from "./base-catalog.entity";
 
-@Entity({ name: 'role' })
+@Entity({ name: 'roles' })
 export class Role extends BaseCatalogEntity {}
