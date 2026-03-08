@@ -1,5 +1,4 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
-import { UpdateCategoryCommand } from "../../Requests/Category/UpdateCategoryCommand";
 import { UpdateTareoCommand } from "../../Requests/Tareo/UpdateTareoCommand";
 import { Inject } from "@nestjs/common";
 import type { ITareoRepository } from "src/Repository/Interface/ITareoRepository";

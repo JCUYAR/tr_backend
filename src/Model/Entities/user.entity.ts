@@ -11,7 +11,7 @@ export class User {
     @Column({ type: 'varchar', length: 20 })
     document_number: string;  
 
-    @Column({ type: 'varchar', length: 50 })
+    @Column({ type: 'varchar', length: 60 })
     us_password: string;
 
     @Column({ type: 'varchar', length: 100 })
