@@ -6,6 +6,6 @@ import { IsExistsUserResponse } from "src/Model/DTOs/Responses/User/IsExistsUser
 export interface IUserRepository extends IGenericRepository<User> {
     findById(id: number): Promise<IsExistsUserResponse | null>;
 
-    existsByUsername(description: string): Promise<boolean>
+    existsByUsername(description: string): Promise<IsExistsUserResponse | null>
 
 }
