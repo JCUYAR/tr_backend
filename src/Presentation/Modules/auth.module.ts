@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/Model/Entities/user.entity';
 import { UserRepository } from 'src/Repository/Implementation/UserRepository';
 import { Role } from 'src/Model/Entities/role.entity';
+import { JwtStrategy } from 'src/Infrastructure/JwtStrategy';
 
 @Module({
     imports: [
@@ -24,6 +25,7 @@ import { Role } from 'src/Model/Entities/role.entity';
         AuthController
     ],
     providers: [
+        JwtStrategy,
         LoginCommandHandler,
         {
             provide: 'IUserRepository',

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiOperation } from "@nestjs/swagger";
 import { AddTareoCommand } from "src/Domain/Feature/Commands/Requests/Tareo/AddTareoCommand";
@@ -7,6 +7,7 @@ import { GetListTareoByUserQuery } from "src/Domain/Feature/Queries/Requests/Tar
 import { GetListTareoQuery } from "src/Domain/Feature/Queries/Requests/Tareo/GetListTareoQuery";
 import { AddTareoDto } from "src/Model/DTOs/BodySchema/Tareo/AddTareoDto";
 import { UpdateTareoDto } from "src/Model/DTOs/BodySchema/Tareo/UpdateTareoDto";
+import { JwtAuthGuard } from "../Guards/jwt-auth.guard";
 
 @Controller('tareo')
 export class TareoController {
@@ -15,17 +16,20 @@ export class TareoController {
         private readonly queryBus: QueryBus,
     ) {}
 
+    @UseGuards(JwtAuthGuard)
     @Get('ListTareo')
     async getAll() {
         return await this.queryBus.execute(new GetListTareoQuery());
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get('ListTareoByUser/:id')
     async getByUser(@Param('id') id: number) {
         return await this.queryBus.execute(
             new GetListTareoByUserQuery(Number(id)));
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post('AddTareo')
     @ApiOperation({ summary: 'AddTareo' })
     async addTareo(
@@ -46,6 +50,7 @@ export class TareoController {
         )
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put('UpdateTareo')
     @ApiOperation({ summary: 'UpdateTareo' })
     async updateTareo(
