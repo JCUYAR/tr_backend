@@ -17,7 +17,7 @@ export class UpdateCategoryCommandHandler
 
   async execute(command: UpdateCategoryCommand): Promise<BaseResult<boolean>> {
 
-    const category = await this.categoryRepository.findOneBy({ id: command.id });
+    const category = await this.categoryRepository.findOneBy({ id: command.data.id });
 
     if (!category) {
       return BaseResult.fail(
@@ -25,14 +25,14 @@ export class UpdateCategoryCommandHandler
       );
     }
 
-    if (!command.key || command.key.trim().length === 0) {
+    if (!command.data.key || command.data.key.trim().length === 0) {
       return BaseResult.fail(
         new AppError(ErrorCode.MandatoryField, "Key is required", "key")
       );
     }
 
-    category.ca_key = command.key;
-    category.description = (!command.description || command.description.trim().length === 0) ? category.description : command.description;
+    category.ca_key = command.data.key;
+    category.description = (!command.data.description || command.data.description.trim().length === 0) ? category.description : command.data.description;
 
     await this.categoryRepository.updateAsync(category);
 

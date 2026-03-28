@@ -33,7 +33,7 @@ export class UpdateTareoCommandHandler
     ) {}
 
     async execute(command: UpdateTareoCommand): Promise<BaseResult<boolean>> {
-        const tareo = await this.tareoRepository.findOneBy({ id: command.id });
+        const tareo = await this.tareoRepository.findOneBy({ id: command.data.id });
 
         if (!tareo) {
             return BaseResult.fail(
@@ -41,32 +41,32 @@ export class UpdateTareoCommandHandler
             );
         }
 
-        const isStatus = await this.statusRepository.findById(command.status_id);
+        const isStatus = await this.statusRepository.findById(command.data.status_id);
 
         if (!isStatus) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Status doesn't exists", "status"))
         }
 
-        const isArea = await this.areaRepository.findById(command.area_id);
+        const isArea = await this.areaRepository.findById(command.data.area_id);
 
         if (!isArea) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Area doesn't exists", "area"))
         }
 
-        const isCategory = await this.categoryRepository.findById(command.category_id);
+        const isCategory = await this.categoryRepository.findById(command.data.category_id);
 
         if (!isCategory) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Category doesn't exists", "category"))
         }
 
 
-        tareo.description = (!command.description || command.description.trim().length === 0) ? tareo.description : command.description;
-        tareo.area = { id: command.area_id } as Area;
-        tareo.category = { id: command.category_id } as unknown as Category;
-        tareo.status = { id: command.status_id } as Status;
-        tareo.start_time = command.start_time;
-        tareo.end_time = command.end_time;
-        tareo.total_hours = calculateHours(command.start_time, command.end_time);
+        tareo.description = (!command.data.description || command.data.description.trim().length === 0) ? tareo.description : command.data.description;
+        tareo.area = { id: command.data.area_id } as Area;
+        tareo.category = { id: command.data.category_id } as unknown as Category;
+        tareo.status = { id: command.data.status_id } as Status;
+        tareo.start_time = command.data.start_time;
+        tareo.end_time = command.data.end_time;
+        tareo.total_hours = calculateHours(command.data.start_time, command.data.end_time);
 
         await this.tareoRepository.updateAsync(tareo);
 

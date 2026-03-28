@@ -37,16 +37,7 @@ export class TareoController {
 
     ) {
         return this.commandBus.execute(
-            new AddTareoCommand(
-                body.description,
-                body.user_id,
-                body.category_id,  // ✔ correcto
-                body.area_id,
-                body.status_id,
-                body.work_date,
-                body.start_time,
-                body.end_time
-            )
+            new AddTareoCommand(body)
         )
     }
 
@@ -57,15 +48,7 @@ export class TareoController {
         @Body() body: UpdateTareoDto
     ) {
         return this.commandBus.execute(
-            new UpdateTareoCommand(
-                body.id,
-                body.description,
-                body.category_id,
-                body.area_id,
-                body.status_id,
-                body.start_time,
-                body.end_time
-            )
+            new UpdateTareoCommand(body)
         )
     }
     

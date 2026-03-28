@@ -1,7 +1,7 @@
+import { UpdateCategoryDto } from "src/Model/DTOs/BodySchema/Category/UpdateCategoryDto";
+
 export class UpdateCategoryCommand {
   constructor(
-    public readonly id: number,
-    public readonly key: string,
-    public readonly description: string
+    public readonly data: UpdateCategoryDto
   ) {}
 }
