@@ -37,10 +37,8 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
 
     ) {}
 
-    async execute(
-        command: AddTareoCommand,
-    ): Promise<BaseResult<boolean>> {
-        const isUser = await this.userRepository.findById(command.user_id);
+    async execute(command: AddTareoCommand) {
+        const isUser = await this.userRepository.findById(command.data.user_id);
 
         if (!isUser) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "User doesn't exists", "user"))
@@ -50,20 +48,20 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
         const prefix = `${initials}1`;
         const lastCode = await this.tareoRepository.getLastCodeByPrefix(prefix);
         const tareoCode = await generateNextCode(prefix, lastCode);
-        const isStatus = await this.statusRepository.findById(command.status_id);
+        const isStatus = await this.statusRepository.findById(command.data.status_id);
 
 
         if (!isStatus) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Status doesn't exists", "status"))
         }
 
-        const isArea = await this.areaRepository.findById(command.area_id);
+        const isArea = await this.areaRepository.findById(command.data.area_id);
 
         if (!isArea) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Area doesn't exists", "area"))
         }
 
-        const isCategory = await this.categoryRepository.findById(command.category_id);
+        const isCategory = await this.categoryRepository.findById(command.data.category_id);
 
         if (!isCategory) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Category doesn't exists", "category"))
@@ -73,15 +71,15 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
 
         const tareo = new Tareo();
         tareo.tareo_code = tareoCode;
-        tareo.description = command.description;
-        tareo.user = { id: command.user_id } as User;
-        tareo.area = { id: command.area_id } as Area;
-        tareo.category = { id: command.category_id } as unknown as Category;
-        tareo.status = { id: command.status_id } as Status;
-        tareo.work_date = command.work_date;
-        tareo.start_time = command.start_time;
-        tareo.end_time = command.end_time;
-        tareo.total_hours = await calculateHours(command.start_time, command.end_time);
+        tareo.description = command.data.description;
+        tareo.user = { id: command.data.user_id } as User;
+        tareo.area = { id: command.data.area_id } as Area;
+        tareo.category = { id: command.data.category_id } as unknown as Category;
+        tareo.status = { id: command.data.status_id } as Status;
+        tareo.work_date = command.data.work_date;
+        tareo.start_time = command.data.start_time;
+        tareo.end_time = command.data.end_time;
+        tareo.total_hours = await calculateHours(command.data.start_time, command.data.end_time);
 
         await this.tareoRepository.addAsync(tareo);
 

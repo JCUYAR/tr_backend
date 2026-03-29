@@ -10,6 +10,7 @@ export class UserController {
         private readonly commandBus: CommandBus,
         private readonly queryBus: QueryBus,
     ) {}
+    
     @Post('AddUser')
     @ApiOperation({ summary: 'AddUser' })
     async addUser(
