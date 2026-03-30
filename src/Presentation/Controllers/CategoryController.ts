@@ -29,11 +29,7 @@ export class CategoryController {
         @Body() body: UpdateCategoryDto
     ) {
         return this.commandBus.execute(
-            new UpdateCategoryCommand(
-                body.id,
-                body.key,
-                body.description
-            )
+            new UpdateCategoryCommand(body)
         )
     }
 }

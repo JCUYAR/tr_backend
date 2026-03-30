@@ -5,6 +5,7 @@ import { AddUserCommandHandler } from 'src/Domain/Feature/Commands/Handlers/User
 import { User } from "src/Model/Entities/user.entity";
 import { UserRepository } from 'src/Repository/Implementation/UserRepository';
 import { UserController } from '../Controllers/UserController';
+import { GetUserDataQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Users/GetUserDataQueryHandler';
 
 @Module({
     imports: [
@@ -18,6 +19,7 @@ import { UserController } from '../Controllers/UserController';
     ],
     providers: [
         AddUserCommandHandler,
+        GetUserDataQueryHandler,
         {
             provide: 'IUserRepository',
             useClass: UserRepository,

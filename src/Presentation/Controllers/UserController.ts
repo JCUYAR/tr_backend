@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiOperation } from "@nestjs/swagger";
 import { AddUserCommand } from "src/Domain/Feature/Commands/Requests/Users/AddUserCommand";
 import { AddUserDto } from "src/Model/DTOs/BodySchema/Users/AddUserDto";
+import { JwtAuthGuard } from "../Guards/jwt-auth.guard";
+import { GetUserDataQuery } from "src/Domain/Feature/Queries/Requests/Users/GetUserDataQuery";
 
 @Controller('user')
 export class UserController {
@@ -24,5 +26,12 @@ export class UserController {
                 body.document_number
             )
         )
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('GetUserById/:id')
+    async getUserById(@Param('id') id: number) {
+        return await this.queryBus.execute(
+            new GetUserDataQuery(Number(id)));
     }
 }
