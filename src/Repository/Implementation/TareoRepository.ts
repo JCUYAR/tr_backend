@@ -42,9 +42,9 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
         return BaseResult.ok(result);
     }
 
-    async findByUser(userId: number): Promise<GetListTareoResponse[]> {
+    async findByUser(userId: number): Promise<BaseResult<GetListTareoResponse[]>> {
 
-        return await this.repository
+        const result =  await this.repository
             .createQueryBuilder('t')
             .leftJoin('t.user', 'u')
             .leftJoin('t.category', 'c')
@@ -63,6 +63,8 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
                 's.description as status',
             ])
             .getRawMany();
+
+        return BaseResult.ok(result);
     }
 
     async findById(id: number): Promise<boolean> {

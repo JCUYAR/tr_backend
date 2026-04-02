@@ -44,7 +44,7 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "User doesn't exists", "user"))
         }
 
-        const initials = isUser.username.substring(0,2).toUpperCase();
+        const initials = isUser.username?.substring(0,2).toUpperCase();
         const prefix = `${initials}1`;
         const lastCode = await this.tareoRepository.getLastCodeByPrefix(prefix);
         const tareoCode = await generateNextCode(prefix, lastCode);

@@ -3,6 +3,7 @@ import type { ITareoRepository } from "src/Repository/Interface/ITareoRepository
 import { Inject } from "@nestjs/common";
 import { GetListTareoResponse } from "src/Model/DTOs/Responses/Tareo/GetListTareoResponse";
 import { GetListTareoByUserQuery } from "../../Requests/Tareo/GetListTareoByUserQuery";
+import { BaseResult } from "src/Model/Wrappers/BaseResult";
 
 @QueryHandler(GetListTareoByUserQuery)
 export class GetListTareoByUserQueryHandler 
@@ -13,7 +14,7 @@ export class GetListTareoByUserQueryHandler
     ) {}
 
     async execute(parameter: GetListTareoByUserQuery,
-    ): Promise<GetListTareoResponse[]> {
+    ): Promise<BaseResult<GetListTareoResponse[]>> {
         return await this.tareoRepository.findByUser(parameter.id);
     }
 }

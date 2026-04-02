@@ -8,7 +8,7 @@ import { BaseResult } from "src/Model/Wrappers/BaseResult";
 export interface ITareoRepository extends IGenericRepository<Tareo>{
     findAllWithRelations(): Promise<BaseResult<GetListTareoResponse[]>>;
 
-    findByUser(userId: number): Promise<GetListTareoResponse[]>;
+    findByUser(userId: number): Promise<BaseResult<GetListTareoResponse[]>>;
 
     findById(id: number): Promise<boolean>;
 

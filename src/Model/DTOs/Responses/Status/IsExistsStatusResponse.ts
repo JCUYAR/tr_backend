@@ -1,4 +1,4 @@
 export class IsExistsStatusResponse {
-  id: number;
-  description: string;
+  id?: number;
+  description?: string;
 }
