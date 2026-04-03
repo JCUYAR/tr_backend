@@ -56,6 +56,8 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
                 't.tareo_code as tareoCode',
                 't.work_date as workDate',
                 't.description as description',
+                't.start_time as startTime',
+                't.end_time as endTime',
                 't.total_hours as totalHours',
                 'u.username as username',
                 'c.description as category',
