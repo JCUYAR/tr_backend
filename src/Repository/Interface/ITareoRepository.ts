@@ -13,7 +13,6 @@ export interface ITareoRepository extends IGenericRepository<Tareo>{
     findById(id: number): Promise<boolean>;
 
     getLastCodeByPrefix(prefix: string): Promise<string | null>;
-
     //findByDateRange(start: Date, end: Date): Promise<GetListTareoResponse[]>;
 
     //createTareo(tareo: Tareo): Promise<Boolean>

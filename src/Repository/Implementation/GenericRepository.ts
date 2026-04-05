@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { IGenericRepository } from "../Interface/IGenericRepository";
-import { Repository, ObjectLiteral, FindOptionsWhere  } from "typeorm";
+import { Repository, ObjectLiteral, FindOptionsWhere } from "typeorm";
 
 @Injectable()
 export class GenericRepository<T extends ObjectLiteral> implements IGenericRepository<T> {
@@ -23,5 +23,9 @@ export class GenericRepository<T extends ObjectLiteral> implements IGenericRepos
 
     async deleteAsync(entity: T): Promise<void> {
         await this.repository.remove(entity);
+    }
+
+    async listById(id: number): Promise<void> {
+        await this.repository.find
     }
 }

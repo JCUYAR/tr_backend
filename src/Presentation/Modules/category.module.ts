@@ -9,6 +9,7 @@ import { CategoryRepository } from 'src/Repository/Implementation/CategoryReposi
 import { CategoryController } from '../Controllers/CategoryController';
 import { AddCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Category/AddCategoryCommandHandler';
 import { UpdateCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Category/UpdateCategoryCommandHandler';
+import { ListAllCateQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Category/ListAllCateQueryHandler';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { UpdateCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handle
   providers: [
     AddCategoryCommandHandler,
     UpdateCategoryCommandHandler,
+    ListAllCateQueryHandler,
     {
       provide: 'ICategoryRepository',
       useClass: CategoryRepository,

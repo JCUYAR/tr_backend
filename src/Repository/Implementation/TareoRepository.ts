@@ -20,10 +20,6 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
     async findAllWithRelations(): Promise<BaseResult<GetListTareoResponse[]>> {
         const result = await this.repository
             .createQueryBuilder('t')
-            .leftJoin('t.user', 'u')
-            .leftJoin('t.category', 'c')
-            .leftJoin('t.area', 'a')
-            .leftJoin('t.status', 's')
             .select([
                 't.id as id',
                 't.tareo_code as tareoCode',
@@ -32,10 +28,10 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
                 't.start_time as startTime',
                 't.end_time as endTime',
                 't.total_hours as totalHours',
-                'u.username as username',
-                'c.description as category',
-                'a.description as area',
-                's.description as status',
+                't.user_id as user_id',
+                't.category_id as category',
+                't.area_id as area',
+                't.status_id as status',
             ])
             .getRawMany();
 
@@ -43,13 +39,8 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
     }
 
     async findByUser(userId: number): Promise<BaseResult<GetListTareoResponse[]>> {
-
         const result =  await this.repository
             .createQueryBuilder('t')
-            .leftJoin('t.user', 'u')
-            .leftJoin('t.category', 'c')
-            .leftJoin('t.area', 'a')
-            .leftJoin('t.status', 's')
             .where('t.user_id = :userId', { userId })
             .select([
                 't.id as id',
@@ -59,10 +50,10 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
                 't.start_time as startTime',
                 't.end_time as endTime',
                 't.total_hours as totalHours',
-                'u.username as username',
-                'c.description as category',
-                'a.description as area',
-                's.description as status',
+                't.user_id as user_id',
+                't.category_id as category',
+                't.area_id as area',
+                't.status_id as status',
             ])
             .getRawMany();
 
