@@ -45,7 +45,7 @@ export class Tareo {
     total_hours: number;
 
     @Column({ type: 'text', nullable: true })
-    description?: string;
+    description: string;
 
     @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;

@@ -8,6 +8,8 @@ import { StatusRepository } from 'src/Repository/Implementation/StatusRepository
 import { AreaRepository } from 'src/Repository/Implementation/AreaRepository';
 import { AddStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/AddStatusCommandHandler';
 import { AddAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/AddAreaCommandHandler';
+import { ListAllAreaQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Area/ListAllAreaQueryHandler';
+import { ListAllStatusQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Status/ListAllStatusQueryHandler';
 
 @Module({
   imports: [
@@ -21,12 +23,18 @@ import { AddAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area
     CatalogController
   ],
   providers: [
+
+    // Status
     AddStatusCommandHandler,
+    ListAllStatusQueryHandler,
     {
       provide: 'IStatusRepository',
       useClass: StatusRepository,
     },
+
+    // Area
     AddAreaCommandHandler,
+    ListAllAreaQueryHandler,
     {
       provide: 'IAreaRepository',
       useClass: AreaRepository,

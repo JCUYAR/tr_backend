@@ -5,6 +5,8 @@ import { GenericRepository } from "./GenericRepository";
 import { IStatusRepository } from "../Interface/IStatusRepository";
 import { Status } from "src/Model/Entities/status.entity";
 import { IsExistsStatusResponse } from "src/Model/DTOs/Responses/Status/IsExistsStatusResponse";
+import { BaseResult } from "src/Model/Wrappers/BaseResult";
+import { SelectDto } from "src/Model/Wrappers/SelectDto";
 
 @Injectable()
 export class StatusRepository extends GenericRepository<Status> implements IStatusRepository{
@@ -26,5 +28,18 @@ export class StatusRepository extends GenericRepository<Status> implements IStat
             id: status.id,
             description: status.description
         }
+    }
+
+    async listAllStatus(): Promise<BaseResult<SelectDto>> {
+        const status = await this.repository.find({
+            select: ['id', 'description']
+        });
+
+        const result: SelectDto[] = status.map(u => ({
+            value: u.id.toString(),
+            descript: u.description.toString()
+        }));
+
+        return BaseResult.ok(result);
     }
 }

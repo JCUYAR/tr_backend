@@ -45,7 +45,7 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
             .select([
                 't.id as id',
                 't.tareo_code as tareoCode',
-                't.work_date as workDate',
+                't.work_date as work_date',
                 't.description as description',
                 't.start_time as startTime',
                 't.end_time as endTime',

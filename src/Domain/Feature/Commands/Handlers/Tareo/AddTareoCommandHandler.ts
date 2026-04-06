@@ -48,20 +48,20 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
         const prefix = `${initials}1`;
         const lastCode = await this.tareoRepository.getLastCodeByPrefix(prefix);
         const tareoCode = await generateNextCode(prefix, lastCode);
-        const isStatus = await this.statusRepository.findById(command.data.status_id);
+        const isStatus = await this.statusRepository.findById(command.data.status);
 
 
         if (!isStatus) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Status doesn't exists", "status"))
         }
 
-        const isArea = await this.areaRepository.findById(command.data.area_id);
+        const isArea = await this.areaRepository.findById(command.data.area);
 
         if (!isArea) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Area doesn't exists", "area"))
         }
 
-        const isCategory = await this.categoryRepository.findById(command.data.category_id);
+        const isCategory = await this.categoryRepository.findById(command.data.category);
 
         if (!isCategory) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Category doesn't exists", "category"))
@@ -73,9 +73,9 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
         tareo.tareo_code = tareoCode;
         tareo.description = command.data.description;
         tareo.user = { id: command.data.user_id } as User;
-        tareo.area = { id: command.data.area_id } as Area;
-        tareo.category = { id: command.data.category_id } as unknown as Category;
-        tareo.status = { id: command.data.status_id } as Status;
+        tareo.area = { id: command.data.area } as Area;
+        tareo.category = { id: command.data.category } as unknown as Category;
+        tareo.status = { id: command.data.status } as Status;
         tareo.work_date = command.data.work_date;
         tareo.start_time = command.data.start_time;
         tareo.end_time = command.data.end_time;

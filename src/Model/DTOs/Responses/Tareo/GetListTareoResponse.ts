@@ -6,6 +6,6 @@ export class GetListTareoResponse {
   category?: number;
   area?: number;
   status?: number;
-  workDate?: Date;
+  work_date?: Date;
   totalHours?: number;
 }
