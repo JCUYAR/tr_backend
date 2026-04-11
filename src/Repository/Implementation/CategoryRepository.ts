@@ -30,7 +30,7 @@ export class CategoryRepository extends GenericRepository<Category> implements I
         }
     }
 
-    async listAllCate(): Promise<BaseResult<SelectDto>> {
+    async listAllCate(): Promise<BaseResult<SelectDto[]>> {
 
         const categories = await this.repository.find({
             select: ['id', 'ca_key', 'description']

@@ -13,7 +13,7 @@ export class ListAllUsersQueryHandler
         private readonly userRepository: IUserRepository,
     ) {}
 
-    async execute(): Promise<BaseResult<SelectDto>> {
+    async execute(): Promise<BaseResult<SelectDto[]>> {
         return await this.userRepository.listAllUsers();
     }
 }

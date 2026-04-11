@@ -11,6 +11,7 @@ import { UserModule } from './user.module';
 import { CatalogModule } from './catalog.module';
 import { CategoryModule } from './category.module';
 import { UpdateTareoCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Tareo/UpdateTareoCommandHandler';
+import { GetOneTareoQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Tareo/GetOneTareoQueryHandler';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { UpdateTareoCommandHandler } from 'src/Domain/Feature/Commands/Handlers/
   providers: [
     GetListTareoQueryHandler, 
     GetListTareoByUserQueryHandler,
+    GetOneTareoQueryHandler,
     AddTareoCommandHandler,
     UpdateTareoCommandHandler,
     {

@@ -10,5 +10,5 @@ export interface IStatusRepository extends IGenericRepository<Status> {
 
     findById(id: number): Promise<IsExistsStatusResponse | null>;
 
-    listAllStatus(): Promise<BaseResult<SelectDto>>
+    listAllStatus(): Promise<BaseResult<SelectDto[]>>
 }

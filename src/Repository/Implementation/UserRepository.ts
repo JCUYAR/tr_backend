@@ -60,7 +60,7 @@ export class UserRepository extends GenericRepository<User> implements IUserRepo
         }
     }
 
-    async listAllUsers(): Promise<BaseResult<SelectDto>> {
+    async listAllUsers(): Promise<BaseResult<SelectDto[]>> {
 
         const users = await this.repository.find({
             select: ['id', 'first_name', 'last_name']

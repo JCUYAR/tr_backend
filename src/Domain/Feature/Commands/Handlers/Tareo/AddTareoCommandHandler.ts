@@ -83,7 +83,7 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
 
         await this.tareoRepository.addAsync(tareo);
 
-        return BaseResult.ok();
+        return BaseResult.ok(true);
 
     }
 

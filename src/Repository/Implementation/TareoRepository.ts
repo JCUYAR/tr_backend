@@ -60,9 +60,29 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
         return BaseResult.ok(result);
     }
 
-    async findById(id: number): Promise<boolean> {
-        const category = await this.findOneBy({ id });
-        return !!category;
+    async findOneById(
+        id: number, idUser: number
+    ): Promise<BaseResult<GetListTareoResponse>> {
+        const result =  await this.repository
+            .createQueryBuilder('t')
+            .where('t.user_id = :idUser', { idUser })
+            .andWhere('t.id = :id', { id })
+            .select([
+                't.id as id',
+                't.tareo_code as tareoCode',
+                't.work_date as work_date',
+                't.description as description',
+                't.start_time as startTime',
+                't.end_time as endTime',
+                't.total_hours as totalHours',
+                't.user_id as user_id',
+                't.category_id as category',
+                't.area_id as area',
+                't.status_id as status',
+            ])
+            .getRawOne();
+
+        return BaseResult.ok(result);
     }
 
     async getLastCodeByPrefix(prefix: string): Promise<string | null> {

@@ -16,7 +16,7 @@ export class LoginCommandHandler implements ICommandHandler<LoginCommand> {
         private readonly userRepository: IUserRepository,
 
         private jwtService: JwtService
-    ) {}
+    ) { }
 
     async execute(command: LoginCommand) {
         const user = await this.userRepository.existsByUsername(
@@ -43,12 +43,10 @@ export class LoginCommandHandler implements ICommandHandler<LoginCommand> {
         }
 
         const token = this.jwtService.sign(payload);
-        
-        return BaseResult.ok<LoginResponse>([
-            { 
-                access_token: token,
-                id: user.id
-            }
-        ]);
+
+        return BaseResult.ok<LoginResponse>({
+            access_token: token,
+            id: user.id
+        });
     }
 }

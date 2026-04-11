@@ -10,7 +10,7 @@ export interface ITareoRepository extends IGenericRepository<Tareo>{
 
     findByUser(userId: number): Promise<BaseResult<GetListTareoResponse[]>>;
 
-    findById(id: number): Promise<boolean>;
+    findOneById(id: number, idUser: number): Promise<BaseResult<GetListTareoResponse>>;
 
     getLastCodeByPrefix(prefix: string): Promise<string | null>;
     //findByDateRange(start: Date, end: Date): Promise<GetListTareoResponse[]>;

@@ -37,6 +37,6 @@ export class AddAreaCommandHandler implements ICommandHandler<AddAreaCommand> {
             return BaseResult.fail(new AppError(ErrorCode.DatabaseCommitNotAffected, "Area not created", "description"));
         }
 
-        return BaseResult.ok();
+        return BaseResult.ok(result);
     }
 }

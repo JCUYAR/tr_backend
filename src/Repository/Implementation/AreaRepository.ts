@@ -30,7 +30,7 @@ export class AreaRepository extends GenericRepository<Area> implements IAreaRepo
         }
     }
 
-    async listAllArea(): Promise<BaseResult<SelectDto>> {
+    async listAllArea(): Promise<BaseResult<SelectDto[]>> {
         const area = await this.repository.find({
             select: ['id', 'description']
         });

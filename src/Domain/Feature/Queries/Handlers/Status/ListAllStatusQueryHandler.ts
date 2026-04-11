@@ -13,7 +13,7 @@ export class ListAllStatusQueryHandler
         private readonly statusRepository: IStatusRepository,
     ) {}
 
-    async execute(): Promise<BaseResult<SelectDto>> {
+    async execute(): Promise<BaseResult<SelectDto[]>> {
         return await this.statusRepository.listAllStatus();
     }
 }

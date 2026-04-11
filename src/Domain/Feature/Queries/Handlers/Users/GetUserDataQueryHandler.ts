@@ -17,7 +17,7 @@ export class GetUserDataQueryHandler
 
     async execute(
         request: GetUserDataQuery,
-    ): Promise<BaseResult<IsExistsUserEndResponse>> {
+    ): Promise<BaseResult<IsExistsUserEndResponse[]>> {
 
         const user = await this.userRepository.findByIdEnd(request.id);
 

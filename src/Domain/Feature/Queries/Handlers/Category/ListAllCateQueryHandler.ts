@@ -14,7 +14,7 @@ export class ListAllCateQueryHandler
         private readonly categoryRepository: ICategoryRepository,
     ) {}
 
-    async execute(): Promise<BaseResult<SelectDto>> {
+    async execute(): Promise<BaseResult<SelectDto[]>> {
         return await this.categoryRepository.listAllCate();
     }
 }

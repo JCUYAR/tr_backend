@@ -41,6 +41,6 @@ export class AddUserCommandHandler implements ICommandHandler<AddUserCommand> {
 
         await this.userRepository.addAsync(user);
 
-        return BaseResult.ok();
+        return BaseResult.ok(true);
     }
 }

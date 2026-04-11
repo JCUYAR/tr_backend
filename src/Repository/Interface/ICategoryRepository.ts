@@ -10,5 +10,5 @@ export interface ICategoryRepository extends IGenericRepository<Category> {
 
     findById(id: number): Promise<IsExistsCategoryResponse | null>;
 
-    listAllCate(): Promise<BaseResult<SelectDto>>
+    listAllCate(): Promise<BaseResult<SelectDto[]>>
 }

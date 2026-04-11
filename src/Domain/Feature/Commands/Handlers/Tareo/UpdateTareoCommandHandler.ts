@@ -70,7 +70,7 @@ export class UpdateTareoCommandHandler
 
         await this.tareoRepository.updateAsync(tareo);
 
-        return BaseResult.ok();
+        return BaseResult.ok(true);
 
     }
 }

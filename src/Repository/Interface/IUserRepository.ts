@@ -13,5 +13,5 @@ export interface IUserRepository extends IGenericRepository<User> {
 
     findByIdEnd(id: number): Promise<IsExistsUserEndResponse | null>
 
-    listAllUsers(): Promise<BaseResult<SelectDto>>
+    listAllUsers(): Promise<BaseResult<SelectDto[]>>
 }

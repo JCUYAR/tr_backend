@@ -14,7 +14,7 @@ export class ListAllAreaQueryHandler
         private readonly areaRepository: IAreaRepository,
     ) {}
 
-    async execute(): Promise<BaseResult<SelectDto>> {
+    async execute(): Promise<BaseResult<SelectDto[]>> {
         return await this.areaRepository.listAllArea();
     }
 }

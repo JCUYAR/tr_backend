@@ -30,7 +30,7 @@ export class StatusRepository extends GenericRepository<Status> implements IStat
         }
     }
 
-    async listAllStatus(): Promise<BaseResult<SelectDto>> {
+    async listAllStatus(): Promise<BaseResult<SelectDto[]>> {
         const status = await this.repository.find({
             select: ['id', 'description']
         });

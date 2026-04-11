@@ -8,13 +8,14 @@ import { GetListTareoQuery } from "src/Domain/Feature/Queries/Requests/Tareo/Get
 import { AddTareoDto } from "src/Model/DTOs/BodySchema/Tareo/AddTareoDto";
 import { UpdateTareoDto } from "src/Model/DTOs/BodySchema/Tareo/UpdateTareoDto";
 import { JwtAuthGuard } from "../Guards/jwt-auth.guard";
+import { GetOneTareoQuery } from "src/Domain/Feature/Queries/Requests/Tareo/GetOneTareoQuery";
 
 @Controller('tareo')
 export class TareoController {
     constructor(
         private readonly commandBus: CommandBus,
         private readonly queryBus: QueryBus,
-    ) {}
+    ) { }
 
     @UseGuards(JwtAuthGuard)
     @Get('ListTareo')
@@ -27,6 +28,17 @@ export class TareoController {
     async getByUser(@Param('id') id: number) {
         return await this.queryBus.execute(
             new GetListTareoByUserQuery(Number(id)));
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('ListOneById/:id&:idUser')
+    async getOneById(
+        @Param('id') id: number,
+        @Param('idUser') idUser: number,
+    ) {
+        return await this.queryBus.execute(
+            new GetOneTareoQuery(Number(id), Number(idUser)),
+        );
     }
 
     @UseGuards(JwtAuthGuard)
@@ -51,5 +63,5 @@ export class TareoController {
             new UpdateTareoCommand(body)
         )
     }
-    
+
 }

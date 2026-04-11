@@ -10,5 +10,5 @@ export interface IAreaRepository extends IGenericRepository<Area> {
 
     findById(id: number): Promise<IsExistsAreaResponse | null>;
 
-    listAllArea(): Promise<BaseResult<SelectDto>>
+    listAllArea(): Promise<BaseResult<SelectDto[]>>
 }
