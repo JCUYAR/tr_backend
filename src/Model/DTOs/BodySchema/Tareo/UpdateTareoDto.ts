@@ -8,13 +8,13 @@ export class UpdateTareoDto {
     description: string;
     
     @ApiProperty({})
-    category_id: number;
+    category: number;
     
     @ApiProperty({})
-    area_id: number;
+    area: number;
     
     @ApiProperty({})
-    status_id: number;  
+    status: number;  
 
     @ApiProperty({})
     start_time: string;  
