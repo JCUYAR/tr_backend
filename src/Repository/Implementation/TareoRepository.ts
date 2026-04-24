@@ -95,5 +95,17 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
         return result?.tareo_code ?? null;
     }
 
+    async getAllTareosOfDay(id: number, workDate: Date): Promise<Tareo[]> {
+        const dateStr = new Date(workDate).toISOString().split("T")[0]; // "2026-04-02"
+
+        const result = await this.repository
+            .createQueryBuilder("t")
+            .where("t.user_id = :id", { id })
+            .andWhere("DATE(t.work_date) = :workDate", { workDate: dateStr })
+            .getMany();
+
+        return result;
+    }
+
 
 }

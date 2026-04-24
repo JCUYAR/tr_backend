@@ -55,19 +55,50 @@ export class AddTareoCommandHandler implements ICommandHandler<AddTareoCommand> 
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Status doesn't exists", "status"))
         }
 
-        const isArea = await this.areaRepository.findById(command.data.area);
+        const isArea = await this.areaRepository.findById(
+            command.data.area
+        );
 
         if (!isArea) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Area doesn't exists", "area"))
         }
 
-        const isCategory = await this.categoryRepository.findById(command.data.category);
+        const isCategory = await this.categoryRepository.findById(
+            command.data.category
+        );
 
         if (!isCategory) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Category doesn't exists", "category"))
         }
 
+        const listTareos = await this.tareoRepository.getAllTareosOfDay(
+            command.data.user_id,
+            command.data.work_date
+        );
 
+        const timeToMinutes = (time: string): number => {
+            const [h, m] = time.split(":").map(Number);
+            return h * 60 + m;
+        };
+
+        const newStart = timeToMinutes(command.data.start_time);
+        const newEnd   = timeToMinutes(command.data.end_time);
+
+        const conflicting = listTareos.find(t => {
+            const tStart = timeToMinutes(t.start_time);
+            const tEnd   = timeToMinutes(t.end_time);
+            return newStart < tEnd && newEnd > tStart;
+        });
+
+        if (conflicting) {
+            return BaseResult.fail(
+                new AppError(
+                    ErrorCode.Conflict,
+                    `El horario se cruza con el tareo ${conflicting.tareo_code} (${conflicting.start_time} - ${conflicting.end_time})`,
+                    "time_conflict"
+                )
+            );
+        }
 
         const tareo = new Tareo();
         tareo.tareo_code = tareoCode;

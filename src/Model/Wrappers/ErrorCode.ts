@@ -28,4 +28,5 @@ export enum ErrorCode {
   LicenseException = 26,
   DataUsed = 27,
   NotCompatibleData = 28,
+  Conflict = 50
 }
