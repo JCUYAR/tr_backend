@@ -17,6 +17,12 @@ export class UpdateTareoDto {
     status: number;  
 
     @ApiProperty({})
+    user_id: number;
+
+    @ApiProperty({})
+    work_date: Date;
+
+    @ApiProperty({})
     start_time: string;  
 
     @ApiProperty({})

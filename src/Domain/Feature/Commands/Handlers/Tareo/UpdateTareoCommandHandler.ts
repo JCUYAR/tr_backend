@@ -15,8 +15,7 @@ import { calculateHours } from "src/Domain/Helpers/CalculateWorkedHours";
 
 @CommandHandler(UpdateTareoCommand)
 export class UpdateTareoCommandHandler
-    implements ICommandHandler<UpdateTareoCommand>
-{
+    implements ICommandHandler<UpdateTareoCommand> {
     constructor(
         @Inject("ITareoRepository")
         private readonly tareoRepository: ITareoRepository,
@@ -29,15 +28,15 @@ export class UpdateTareoCommandHandler
 
         @Inject('ICategoryRepository')
         private readonly categoryRepository: ICategoryRepository,
-        
-    ) {}
+
+    ) { }
 
     async execute(command: UpdateTareoCommand): Promise<BaseResult<boolean>> {
         const tareo = await this.tareoRepository.findOneBy({ id: command.data.id });
 
         if (!tareo) {
             return BaseResult.fail(
-            new AppError(ErrorCode.NotFound, "Tareo not found", "id")
+                new AppError(ErrorCode.NotFound, "Tareo not found", "id")
             );
         }
 
@@ -57,6 +56,36 @@ export class UpdateTareoCommandHandler
 
         if (!isCategory) {
             return BaseResult.fail(new AppError(ErrorCode.NotFound, "Category doesn't exists", "category"))
+        }
+
+        const listTareos = await this.tareoRepository.getAllTareosOfDay(
+            command.data.user_id,
+            tareo.work_date,
+            command.data.id
+        );
+
+        const timeToMinutes = (time: string): number => {
+            const [h, m] = time.split(":").map(Number);
+            return h * 60 + m;
+        };
+
+        const newStart = timeToMinutes(command.data.start_time);
+        const newEnd = timeToMinutes(command.data.end_time);
+
+        const conflicting = listTareos.find(t => {
+            const tStart = timeToMinutes(t.start_time);
+            const tEnd = timeToMinutes(t.end_time);
+            return newStart < tEnd && newEnd > tStart;
+        });
+
+        if (conflicting) {
+            return BaseResult.fail(
+                new AppError(
+                    ErrorCode.Conflict,
+                    `El horario se cruza con el tareo ${conflicting.tareo_code} (${conflicting.start_time} - ${conflicting.end_time})`,
+                    "time_conflict"
+                )
+            );
         }
 
 

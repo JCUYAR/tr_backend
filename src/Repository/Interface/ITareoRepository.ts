@@ -17,6 +17,6 @@ export interface ITareoRepository extends IGenericRepository<Tareo>{
 
     //createTareo(tareo: Tareo): Promise<Boolean>
 
-    getAllTareosOfDay(id: number, workDate: Date): Promise<Tareo[]>
+    getAllTareosOfDay(id: number, workDate: Date, excludeId?: number): Promise<Tareo[]>
 
 }
