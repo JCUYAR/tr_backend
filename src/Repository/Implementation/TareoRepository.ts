@@ -68,17 +68,17 @@ export class TareoRepository extends GenericRepository<Tareo> implements ITareoR
             .where('t.user_id = :idUser', { idUser })
             .andWhere('t.id = :id', { id })
             .select([
-                't.id as id',
+                'CAST(t.id AS CHAR) as id',
                 't.tareo_code as tareoCode',
-                't.work_date as work_date',
+                "DATE_FORMAT(t.work_date, '%Y-%m-%d') as work_date",
                 't.description as description',
                 't.start_time as startTime',
                 't.end_time as endTime',
                 't.total_hours as totalHours',
-                't.user_id as user_id',
-                't.category_id as category',
-                't.area_id as area',
-                't.status_id as status',
+                'CAST(t.user_id AS CHAR) as user_id',
+                'CAST(t.category_id AS CHAR) as category',
+                'CAST(t.area_id AS CHAR) as area',
+                'CAST(t.status_id AS CHAR) as status',
             ])
             .getRawOne();
 
