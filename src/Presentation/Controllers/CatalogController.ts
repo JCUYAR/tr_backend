@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { ApiOperation } from "@nestjs/swagger";
+import { ApiOperation, ApiQuery } from "@nestjs/swagger";
 import { AddAreaCommand } from "src/Domain/Feature/Commands/Requests/Area/AddAreaCommand";
 import { AddStatusCommand } from "src/Domain/Feature/Commands/Requests/Status/AddStatusCommand";
 import { AddAreaDto } from "src/Model/DTOs/BodySchema/Catalog/Area/AddAreaDto";
@@ -8,6 +8,9 @@ import { AddStatusDto } from "src/Model/DTOs/BodySchema/Catalog/Status/AddStatus
 import { JwtAuthGuard } from "../Guards/jwt-auth.guard";
 import { ListAllAreaQuery } from "src/Domain/Feature/Queries/Requests/Area/ListAllAreaQuery";
 import { ListAllStatusQuery } from "src/Domain/Feature/Queries/Requests/Status/ListAllStatusQuery";
+import { GetPagedListCatalogQuery } from "src/Domain/Feature/Queries/Requests/Catalog/GetPagedListCatalogQuery";
+import { PagedResponse } from "src/Model/Wrappers/PagedResponseDto";
+import { ListCatalogResponse } from "src/Model/DTOs/Responses/Catalog/ListCatalogResponse";
 
 @Controller('catalog')
 export class CatalogController {
@@ -51,5 +54,24 @@ export class CatalogController {
     @Get('ListAllArea')
     async ListAllArea() {
         return await this.queryBus.execute(new ListAllAreaQuery());
+    }
+
+    @ApiQuery({ name: 'pageNumber', required: true, type: Number })
+    @ApiQuery({ name: 'pageSize', required: true, type: Number })
+    @ApiQuery({ name: 'type', required: false, type: String })
+    @ApiQuery({ name: 'description', required: false, type: String })
+    @UseGuards(JwtAuthGuard)
+    @Get('GetPagedList')
+    async GetPagedList(
+        @Query() query: any,
+    ): Promise<PagedResponse<ListCatalogResponse>> {
+        const pagedQuery = new GetPagedListCatalogQuery(
+            Number(query.pageNumber),
+            Number(query.pageSize),
+            query.type,
+            query.description,
+        );
+
+        return this.queryBus.execute(pagedQuery);
     }
 }

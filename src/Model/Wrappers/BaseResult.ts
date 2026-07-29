@@ -5,7 +5,7 @@ export class BaseResult<T = any> {
   data: T;
   errors: AppError[];
 
-  private constructor(
+  protected constructor(
     success: boolean,
     data: T,
     errors: AppError[] = []

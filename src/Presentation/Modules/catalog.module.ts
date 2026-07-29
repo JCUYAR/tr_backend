@@ -10,6 +10,7 @@ import { AddStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/St
 import { AddAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/AddAreaCommandHandler';
 import { ListAllAreaQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Area/ListAllAreaQueryHandler';
 import { ListAllStatusQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Status/ListAllStatusQueryHandler';
+import { GetPagedListCatalogQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Catalog/GetPagedListCatalogQueryHandler';
 
 @Module({
   imports: [
@@ -39,6 +40,9 @@ import { ListAllStatusQueryHandler } from 'src/Domain/Feature/Queries/Handlers/S
       provide: 'IAreaRepository',
       useClass: AreaRepository,
     },
+
+    // General
+    GetPagedListCatalogQueryHandler,
   ],
   exports: [
     'IStatusRepository',

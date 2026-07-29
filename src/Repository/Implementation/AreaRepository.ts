@@ -7,6 +7,8 @@ import { Area } from "src/Model/Entities/area.entity";
 import { IsExistsAreaResponse } from "src/Model/DTOs/Responses/Area/IsExistsAreaResponse";
 import { BaseResult } from "src/Model/Wrappers/BaseResult";
 import { SelectDto } from "src/Model/Wrappers/SelectDto";
+import { PaginationResponseDto } from "src/Model/Wrappers/PaginationResponseDto";
+import { ListCatalogResponse } from "src/Model/DTOs/Responses/Catalog/ListCatalogResponse";
 
 @Injectable()
 export class AreaRepository extends GenericRepository<Area> implements IAreaRepository {
@@ -41,5 +43,52 @@ export class AreaRepository extends GenericRepository<Area> implements IAreaRepo
         }));
 
         return BaseResult.ok(result);
+    }
+
+    async getPagedListArea(
+        pageNumber: number,
+        pageSize: number,
+        search?: string
+    ): Promise<PaginationResponseDto<ListCatalogResponse>> {
+        const areaTable = this.repository.createQueryBuilder('ar');
+
+        const regStartsWith = await areaTable
+            .clone()
+            .where('ar.description LIKE :search', {
+                search: `${search ?? ''}%`,
+            })
+            .getCount();
+
+        let finalQuery = this.repository.createQueryBuilder('ar');
+
+
+        if (regStartsWith > 0) {
+            finalQuery.where(
+                'ar.description LIKE :search',
+                {
+                    search: `${search ?? ''}%`
+                }
+            ).select([
+                'ar.id AS id',
+                'ar.description AS description',
+            ]);
+        } else {
+            finalQuery
+                .select([
+                    'ar.id AS id',
+                    'ar.description AS description',
+                ]);
+        }
+
+        finalQuery.orderBy('ar.id', 'ASC');
+
+        const total = await finalQuery.clone().getCount();
+
+        const rows = await finalQuery
+            .skip((pageNumber - 1) * pageSize)
+            .take(pageSize)
+            .getRawMany<ListCatalogResponse>();
+
+        return new PaginationResponseDto(rows, total);
     }
 }
