@@ -60,7 +60,7 @@ export class CatalogController {
     @ApiQuery({ name: 'pageSize', required: true, type: Number })
     @ApiQuery({ name: 'type', required: false, type: String })
     @ApiQuery({ name: 'description', required: false, type: String })
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Get('GetPagedList')
     async GetPagedList(
         @Query() query: any,

@@ -23,7 +23,6 @@ export class GetPagedListCatalogQueryHandler
     async execute(
         query: GetPagedListCatalogQuery
     ): Promise<PagedResponse<ListCatalogResponse>> {
-        console.log("Entró al handler");
         var result;
         console.log(query);
         switch (query.type) {
