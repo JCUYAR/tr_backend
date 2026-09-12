@@ -24,7 +24,6 @@ export class GetPagedListCatalogQueryHandler
         query: GetPagedListCatalogQuery
     ): Promise<PagedResponse<ListCatalogResponse>> {
         var result;
-        console.log(query);
         switch (query.type) {
             case "1":
                 result = await this.areaRepository.getPagedListArea(

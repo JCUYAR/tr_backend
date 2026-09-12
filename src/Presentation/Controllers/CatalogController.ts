@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiOperation, ApiQuery } from "@nestjs/swagger";
 import { AddAreaCommand } from "src/Domain/Feature/Commands/Requests/Area/AddAreaCommand";
@@ -11,6 +11,7 @@ import { ListAllStatusQuery } from "src/Domain/Feature/Queries/Requests/Status/L
 import { GetPagedListCatalogQuery } from "src/Domain/Feature/Queries/Requests/Catalog/GetPagedListCatalogQuery";
 import { PagedResponse } from "src/Model/Wrappers/PagedResponseDto";
 import { ListCatalogResponse } from "src/Model/DTOs/Responses/Catalog/ListCatalogResponse";
+import { GetCatalogByIdQuery } from "src/Domain/Feature/Queries/Requests/Catalog/GetCatalogByIdQuery";
 
 @Controller('catalog')
 export class CatalogController {
@@ -60,7 +61,7 @@ export class CatalogController {
     @ApiQuery({ name: 'pageSize', required: true, type: Number })
     @ApiQuery({ name: 'type', required: false, type: String })
     @ApiQuery({ name: 'description', required: false, type: String })
-    // @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard)
     @Get('GetPagedList')
     async GetPagedList(
         @Query() query: any,
@@ -74,4 +75,18 @@ export class CatalogController {
 
         return this.queryBus.execute(pagedQuery);
     }
+
+    // @UseGuards(JwtAuthGuard)
+        @Get('GetOneById/:type&:id')
+        async getByUser(
+            @Param('type') type: string,
+            @Param('id') id: string
+        
+        ) {
+            return await this.queryBus.execute(
+                new GetCatalogByIdQuery(
+                    type,
+                    id
+                ));
+        }
 }
