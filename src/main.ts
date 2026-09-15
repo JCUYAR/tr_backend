@@ -10,7 +10,7 @@ async function bootstrap() {
     .setTitle('My Clean API')
     .setDescription('API documentation')
     .setVersion('1.0')
-    .addBearerAuth() // si usarás JWT
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
