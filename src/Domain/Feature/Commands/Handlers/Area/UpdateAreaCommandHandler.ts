@@ -1,0 +1,41 @@
+import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
+import { Inject } from "@nestjs/common";
+import { BaseResult } from "src/Model/Wrappers/BaseResult";
+import { AppError } from "src/Model/Wrappers/Error";
+import { ErrorCode } from "src/Model/Wrappers/ErrorCode";
+import { UpdateAreaCommand } from "../../Requests/Area/UpdateAreaCommand";
+import type { IAreaRepository } from "src/Repository/Interface/IAreaRepository";
+
+@CommandHandler(UpdateAreaCommand)
+export class UpdateAreaCommandHandler
+  implements ICommandHandler<UpdateAreaCommand>
+{
+  constructor(
+    @Inject("IAreaRepository")
+    private readonly categoryRepository: IAreaRepository
+  ) {}
+
+  async execute(command: UpdateAreaCommand): Promise<BaseResult<boolean>> {
+
+    const category = await this.categoryRepository.findOneBy({ id: command.id });
+
+    if (!category) {
+      return BaseResult.fail(
+        new AppError(ErrorCode.NotFound, "Area not found", "id")
+      );
+    }
+
+    // if (!command.data.key || command.data.key.trim().length === 0) {
+    //   return BaseResult.fail(
+    //     new AppError(ErrorCode.MandatoryField, "Key is required", "key")
+    //   );
+    // }
+
+    // category.id = command.id;
+    category.description = (!command.description || command.description.trim().length === 0) ? category.description : command.description;
+
+    await this.categoryRepository.updateAsync(category);
+
+    return BaseResult.ok(true);
+  }
+}

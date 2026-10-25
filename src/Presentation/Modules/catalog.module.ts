@@ -12,6 +12,8 @@ import { ListAllAreaQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Are
 import { ListAllStatusQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Status/ListAllStatusQueryHandler';
 import { GetPagedListCatalogQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Catalog/GetPagedListCatalogQueryHandler';
 import { GetCatalogByIdQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Catalog/GetCatalogByIdQueryHandler';
+import { UpdateAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/UpdateAreaCommandHandler';
+import { DeleteAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/DeleteAreaCommandHandler';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { GetCatalogByIdQueryHandler } from 'src/Domain/Feature/Queries/Handlers/
 
     // Area
     AddAreaCommandHandler,
+    UpdateAreaCommandHandler,
+    DeleteAreaCommandHandler,
     ListAllAreaQueryHandler,
     {
       provide: 'IAreaRepository',
