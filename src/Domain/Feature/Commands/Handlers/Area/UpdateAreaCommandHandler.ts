@@ -12,14 +12,14 @@ export class UpdateAreaCommandHandler
 {
   constructor(
     @Inject("IAreaRepository")
-    private readonly categoryRepository: IAreaRepository
+    private readonly areaRepository: IAreaRepository
   ) {}
 
   async execute(command: UpdateAreaCommand): Promise<BaseResult<boolean>> {
 
-    const category = await this.categoryRepository.findOneBy({ id: command.id });
+    const area = await this.areaRepository.findOneBy({ id: command.id });
 
-    if (!category) {
+    if (!area) {
       return BaseResult.fail(
         new AppError(ErrorCode.NotFound, "Area not found", "id")
       );
@@ -31,10 +31,10 @@ export class UpdateAreaCommandHandler
     //   );
     // }
 
-    // category.id = command.id;
-    category.description = (!command.description || command.description.trim().length === 0) ? category.description : command.description;
+    // area.id = command.id;
+    area.description = (!command.description || command.description.trim().length === 0) ? area.description : command.description;
 
-    await this.categoryRepository.updateAsync(category);
+    await this.areaRepository.updateAsync(area);
 
     return BaseResult.ok(true);
   }

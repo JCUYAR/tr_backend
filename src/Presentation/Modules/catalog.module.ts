@@ -14,6 +14,8 @@ import { GetPagedListCatalogQueryHandler } from 'src/Domain/Feature/Queries/Hand
 import { GetCatalogByIdQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Catalog/GetCatalogByIdQueryHandler';
 import { UpdateAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/UpdateAreaCommandHandler';
 import { DeleteAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/DeleteAreaCommandHandler';
+import { UpdateStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/UpdateStatusCommandHandler';
+import { DeleteStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/DeleteSstatusCommandHandler';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { DeleteAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/A
 
     // Status
     AddStatusCommandHandler,
+    UpdateStatusCommandHandler,
+    DeleteStatusCommandHandler,
     ListAllStatusQueryHandler,
     {
       provide: 'IStatusRepository',
