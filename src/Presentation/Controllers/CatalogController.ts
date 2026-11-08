@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiOperation, ApiQuery } from "@nestjs/swagger";
 import { AddAreaCommand } from "src/Domain/Feature/Commands/Requests/Area/AddAreaCommand";
@@ -12,6 +12,14 @@ import { GetPagedListCatalogQuery } from "src/Domain/Feature/Queries/Requests/Ca
 import { PagedResponse } from "src/Model/Wrappers/PagedResponseDto";
 import { ListCatalogResponse } from "src/Model/DTOs/Responses/Catalog/ListCatalogResponse";
 import { GetCatalogByIdQuery } from "src/Domain/Feature/Queries/Requests/Catalog/GetCatalogByIdQuery";
+import { UpdateAreaDto } from "src/Model/DTOs/BodySchema/Catalog/Area/UpdateAreaDto";
+import { UpdateAreaCommand } from "src/Domain/Feature/Commands/Requests/Area/UpdateAreaCommand";
+import { DeleteAreaCommand } from "src/Domain/Feature/Commands/Requests/Area/DeleteAreaCommand";
+import { DeleteAreaDto } from "src/Model/DTOs/BodySchema/Catalog/Area/DeleteAreaDto";
+import { UpdateStatusCommand } from "src/Domain/Feature/Commands/Requests/Status/UpdateStatusCommand";
+import { UpdateStatusDto } from "src/Model/DTOs/BodySchema/Catalog/Status/UpdateStatusDto";
+import { DeleteStatusCommand } from "src/Domain/Feature/Commands/Requests/Status/DeleteStatusCommand";
+import { DeleteStatusDto } from "src/Model/DTOs/BodySchema/Catalog/Status/DeleteStatusDto";
 
 @Controller('catalog')
 export class CatalogController {
@@ -33,6 +41,28 @@ export class CatalogController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Put('UpdateStatus')
+    @ApiOperation({ summary: 'UpdateArea' })
+    async updateStatus(
+        @Body() body: UpdateStatusDto
+    ) {
+        return this.commandBus.execute(
+            new UpdateStatusCommand(body.id, body.description)
+        );
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Delete('DeleteStatus')
+    @ApiOperation({ summary: 'DeleteStatus' })
+    async deleteStatus(
+        @Body() body: DeleteStatusDto
+    ) {
+        return this.commandBus.execute(
+            new DeleteStatusCommand(body.id)
+        );
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Get('ListAllStatus')
     async ListAllStatus() {
         return await this.queryBus.execute(new ListAllStatusQuery());
@@ -48,6 +78,28 @@ export class CatalogController {
     ) {
         return this.commandBus.execute(
             new AddAreaCommand(body.description)
+        );
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Put('UpdateArea')
+    @ApiOperation({ summary: 'UpdateArea' })
+    async updateArea(
+        @Body() body: UpdateAreaDto
+    ) {
+        return this.commandBus.execute(
+            new UpdateAreaCommand(body.id, body.description)
+        );
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Delete('DeleteArea')
+    @ApiOperation({ summary: 'DeleteArea' })
+    async deleteArea(
+        @Body() body: DeleteAreaDto
+    ) {
+        return this.commandBus.execute(
+            new DeleteAreaCommand(body.id)
         );
     }
 

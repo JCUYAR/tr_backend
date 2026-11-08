@@ -12,6 +12,10 @@ import { ListAllAreaQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Are
 import { ListAllStatusQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Status/ListAllStatusQueryHandler';
 import { GetPagedListCatalogQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Catalog/GetPagedListCatalogQueryHandler';
 import { GetCatalogByIdQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Catalog/GetCatalogByIdQueryHandler';
+import { UpdateAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/UpdateAreaCommandHandler';
+import { DeleteAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/DeleteAreaCommandHandler';
+import { UpdateStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/UpdateStatusCommandHandler';
+import { DeleteStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/DeleteSstatusCommandHandler';
 
 @Module({
   imports: [
@@ -28,6 +32,8 @@ import { GetCatalogByIdQueryHandler } from 'src/Domain/Feature/Queries/Handlers/
 
     // Status
     AddStatusCommandHandler,
+    UpdateStatusCommandHandler,
+    DeleteStatusCommandHandler,
     ListAllStatusQueryHandler,
     {
       provide: 'IStatusRepository',
@@ -36,6 +42,8 @@ import { GetCatalogByIdQueryHandler } from 'src/Domain/Feature/Queries/Handlers/
 
     // Area
     AddAreaCommandHandler,
+    UpdateAreaCommandHandler,
+    DeleteAreaCommandHandler,
     ListAllAreaQueryHandler,
     {
       provide: 'IAreaRepository',
