@@ -1,6 +1,7 @@
+import { AddCategoryDto } from "src/Model/DTOs/BodySchema/Category/AddCategoryDto";
+
 export class AddCategoryCommand {
     constructor(
-        public readonly key: string,
-        public readonly description: string
+        public readonly data: AddCategoryDto
     ) {}
 }

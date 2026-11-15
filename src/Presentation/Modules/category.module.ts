@@ -10,6 +10,8 @@ import { CategoryController } from '../Controllers/CategoryController';
 import { AddCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Category/AddCategoryCommandHandler';
 import { UpdateCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Category/UpdateCategoryCommandHandler';
 import { ListAllCateQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Category/ListAllCateQueryHandler';
+import { CatalogModule } from './catalog.module';
+import { DeleteCategoryCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Category/DeleteCategoryCommandHandler';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { ListAllCateQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Cat
       Status,
     ]),
     CqrsModule,
+    CatalogModule
   ],
   controllers: [
     CategoryController
@@ -27,6 +30,7 @@ import { ListAllCateQueryHandler } from 'src/Domain/Feature/Queries/Handlers/Cat
     AddCategoryCommandHandler,
     UpdateCategoryCommandHandler,
     ListAllCateQueryHandler,
+    DeleteCategoryCommandHandler,
     {
       provide: 'ICategoryRepository',
       useClass: CategoryRepository,

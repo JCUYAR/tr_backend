@@ -15,7 +15,7 @@ import { GetCatalogByIdQueryHandler } from 'src/Domain/Feature/Queries/Handlers/
 import { UpdateAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/UpdateAreaCommandHandler';
 import { DeleteAreaCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Area/DeleteAreaCommandHandler';
 import { UpdateStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/UpdateStatusCommandHandler';
-import { DeleteStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/DeleteSstatusCommandHandler';
+import { DeleteStatusCommandHandler } from 'src/Domain/Feature/Commands/Handlers/Status/DeleteStatusCommandHandler';
 
 @Module({
   imports: [

@@ -11,4 +11,10 @@ export interface ICategoryRepository extends IGenericRepository<Category> {
     findById(id: number): Promise<IsExistsCategoryResponse | null>;
 
     listAllCate(): Promise<BaseResult<SelectDto[]>>
+
+    getLastCodeByPrefix(prefix: string): Promise<string | null>;
+
+    oneByCaKey(caKey: string): Promise<Category | null>;
+
+    countCategoryInTareo(caKey: string): Promise<number>;
 }

@@ -12,26 +12,27 @@ export class UpdateCategoryCommandHandler
 {
   constructor(
     @Inject("ICategoryRepository")
-    private readonly categoryRepository: ICategoryRepository
+    private readonly categoryRepository: ICategoryRepository,
+
   ) {}
 
   async execute(command: UpdateCategoryCommand): Promise<BaseResult<boolean>> {
 
-    const category = await this.categoryRepository.findOneBy({ id: command.data.id });
+    const category = await this.categoryRepository.oneByCaKey(command.data.ca_key);
 
     if (!category) {
       return BaseResult.fail(
-        new AppError(ErrorCode.NotFound, "Category not found", "id")
+        new AppError(ErrorCode.NotFound, "Category not found", "caKey")
       );
     }
 
-    if (!command.data.key || command.data.key.trim().length === 0) {
+    if (!command.data.description || command.data.description.trim().length === 0) {
       return BaseResult.fail(
-        new AppError(ErrorCode.MandatoryField, "Key is required", "key")
+        new AppError(ErrorCode.MandatoryField, "Description is required", "key")
       );
     }
 
-    category.ca_key = command.data.key;
+    category.ca_key = command.data.ca_key;
     category.description = (!command.data.description || command.data.description.trim().length === 0) ? category.description : command.data.description;
 
     await this.categoryRepository.updateAsync(category);
